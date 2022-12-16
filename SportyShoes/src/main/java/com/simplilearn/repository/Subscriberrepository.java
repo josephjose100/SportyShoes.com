@@ -19,7 +19,7 @@ public class Subscriberrepository {
     @Autowired
 	EntityManager em;
 	
-    public List<Subscriber> getAllUsers(){
+    public List<Subscriber> getAllSubscribers(){
     	
     	List<Subscriber> subscribers=em.createQuery("select s from Subscriber s").getResultList();
     	return subscribers;

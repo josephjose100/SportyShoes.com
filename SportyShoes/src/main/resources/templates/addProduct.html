@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="./add" method="post">
+<h3>ADD PRODUCT</h3>
+PRODUCT ID :<input type="text" name="pId"><br><br>
+PRODUCT NAME :<input type="text" name="pName"><br><br>
+<select id="category" name="category">
+<option value="sports shoes">sports shoes</option>
+<option value="formal shoes">formal shoes</option>
+<option value="casual shoes">casual shoes</option>
+<option value="running shoes">running shoes</option>
+</select><br><br>
+<input type="submit" value="ADD">
+</form>
+
+<a href="#" th:href="@{/return}">Return to home page</a>
+
+</body>
+</html>

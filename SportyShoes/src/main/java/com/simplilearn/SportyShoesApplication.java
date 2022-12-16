@@ -9,37 +9,40 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.simplilearn.entity.Subscriber;
-import com.simplilearn.repository.Subscriberrepository;
+import com.simplilearn.entity.Product;
+import com.simplilearn.repository.Productrepository;
 
 @SpringBootApplication
-public class SportyShoesApplication implements CommandLineRunner {
- 
-	private Logger logger=LoggerFactory.getLogger(this.getClass());
+public class SportyShoesApplication {
 	
-
-	//private Productrepository productrepository;
-	
-	@Autowired	
-	private Subscriberrepository subscriberrepository;
-	
-	
-	//private Adminrepository adminrepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SportyShoesApplication.class, args);
 	}
+}
 
-	@Override
+	
+
+//Logger logger=LoggerFactory.getLogger(this.getClass());
+
+	
+
+	
+	
+/*	@Autowired	
+	private Subscriberrepository subscriberrepository;
+	*/
+	
+	//private Adminrepository adminrepository;
+	
+
+/*	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 	
 		
 		
-	/*	productrepository.saveProduct(new Product("P1","Nike Alpharun","Sports shoe"));
-		productrepository.saveProduct(new Product("P2","Adidas Walk","Casual shoe"));
-		productrepository.saveProduct(new Product("P3","Woodland Brownie","Formal shoe"));
-		
+	/*	
 		productrepository.deleteProduct("P2");
 		
 		*/
@@ -49,8 +52,9 @@ public class SportyShoesApplication implements CommandLineRunner {
 		logger.info("User A2 -> {}",subscriber);
 		*/
 		
-		List<Subscriber> subscribers=subscriberrepository.getAllUsers();
+		/*List<Subscriber> subscribers=subscriberrepository.getAllUsers();
 		logger.info("List of all subscribers -> {}",subscribers);
+		*/
 		
 	/*	Admin admin=adminrepository.findAdminById("A1");
 		logger.info("Admin A1 -> {}",admin);
@@ -61,9 +65,12 @@ public class SportyShoesApplication implements CommandLineRunner {
 		
 		
 		
-		
+/*		
 		
 		
 	}
 
+
 }
+
+*/

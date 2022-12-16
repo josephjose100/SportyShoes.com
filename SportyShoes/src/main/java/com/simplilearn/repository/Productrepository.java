@@ -1,5 +1,7 @@
 package com.simplilearn.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,15 @@ public class Productrepository {
 	
 	public void saveProduct(Product product) {
 		em.persist(product);
+			
+
+		
+	}
+	
+	public List<Product> getAllProduct(){
+		
+		List<Product> products=em.createQuery("select p from Product p").getResultList();
+		return products;
 	}
 	
 	
