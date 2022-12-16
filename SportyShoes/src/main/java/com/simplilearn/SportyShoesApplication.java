@@ -1,7 +1,5 @@
 package com.simplilearn;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,28 +7,37 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.simplilearn.entity.Product;
-import com.simplilearn.repository.Productrepository;
+import com.simplilearn.entity.Subscriber;
+import com.simplilearn.repository.Subscriberrepository;
+import com.simplilearn.services.Subscriberservice;
 
 @SpringBootApplication
-public class SportyShoesApplication {
+public class SportyShoesApplication{
 	
-	
+		
 	public static void main(String[] args) {
 		SpringApplication.run(SportyShoesApplication.class, args);
 	}
 }
+/*	@Override
+	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+		Subscriber subscriber=subscriberservice.searchSubscriber("S2");
+		logger.info("User S2 -> {}",subscriber);
+	
+	private Logger logger=LoggerFactory.getLogger(this.getClass());	
+	}
+}
+
+	
+*/
+//
 
 	
 
-//Logger logger=LoggerFactory.getLogger(this.getClass());
-
-	
-
 	
 	
-/*	@Autowired	
-	private Subscriberrepository subscriberrepository;
+/*
 	*/
 	
 	//private Adminrepository adminrepository;
@@ -49,7 +56,7 @@ public class SportyShoesApplication {
 		
 		
 		/*Subscriber subscriber=subscriberrepository.getSubscriberById("S2");
-		logger.info("User A2 -> {}",subscriber);
+		
 		*/
 		
 		/*List<Subscriber> subscribers=subscriberrepository.getAllUsers();
