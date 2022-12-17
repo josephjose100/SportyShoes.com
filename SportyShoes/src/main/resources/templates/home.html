@@ -5,14 +5,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome Admin bhai</h1>
+<h1>SPORTY SHOES</h1>
+<h3>Welcome Admin </h3>
 <a href="#" th:href="@{/change}">Change Admin password</a>
-
 <h1>Product List :-</h1>
 <a href="#" th:href="@{/new}">Add new Product</a>
 <table border="1px">
 <tr>
-<td>Product Id </td>
+<td>Product Id</td>
 <td>Product Name </td>
 <td>Category </td>
 </tr>
@@ -26,9 +26,9 @@
 <h1>User List :-</h1>
 <table border="1px">
 <tr>
-<td>User Id </td>
-<td>User Name </td>
-<td>password </td>
+<td>USER ID></span></td>
+<td>USER NAME></span></td>
+<td>PASSWORD></span></td>>
 </tr>
 <tr th:each="data : ${subscribers}">
 <td><span th:text="${data.id}"></span></td>
@@ -54,15 +54,13 @@ Enter the User Id : <input type="text" name="id">
 </tr>
 </table>
 <a href="#" th:href="@{/report}">View Entire Purchase Report</a>
-<form action="./categoryreport" method="post">
-<select id="category" name="category">
-<option value="sports shoes">sports shoes</option>
-<option value="formal shoes">formal shoes</option>
-<option value="casual shoes">casual shoes</option>
-<option value="running shoes">running shoes</option>
-</select>
-<input type="submit" value="Sort by Category">
+<br><br><br>
+<form action="./datereport" method="post">
+<input type="text" name="date">**FORMAT:- dd-MM-yyyy<br>
+<input type="submit" value="Sort by Date">
 </form>
+<br>
+<h4>Purchase Report</h4>
 <table border="1px">
 <tr>
 <td>Report Id </td>
@@ -73,6 +71,17 @@ Enter the User Id : <input type="text" name="id">
 <td>Subscriber Id </td>
 <td>Subscriber Name </td>
 <td>Subscriber Password </td>
+<td>
+<form action="./categoryreport" method="post">
+<select id="category" name="category">
+<option value="sports shoes">sports shoes</option>
+<option value="formal shoes">formal shoes</option>
+<option value="casual shoes">casual shoes</option>
+<option value="running shoes">running shoes</option>
+</select>
+<input type="submit" value="Sort by Category">
+</form>
+</td>
 </tr>
 <tr th:each="data : ${report}">
 <td><span th:text="${data.rId}"></span></td>

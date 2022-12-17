@@ -1,6 +1,5 @@
 package com.simplilearn.repository;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class Reportrepository {
 	  return report;
   }
   
-  public List<Report> getDateReport(Date date){
+  public List<Report> getDateReport(String date){
 		
 		List<Report> reports=em.createQuery("select r from Report r").getResultList();
 		List<Report> report=new ArrayList<>();	

@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 public class Report {
     @Id
 	private String rId;
-	private Date date;
+	private String date;
 	@OneToOne
 	private Product product;
 	@OneToOne
@@ -18,7 +18,7 @@ public class Report {
 	public Report() {
 		
 	}
-	public Report(String rId, Date date, Product product, Subscriber subscriber) {
+	public Report(String rId, String date, Product product, Subscriber subscriber) {
 		super();
 		this.rId = rId;
 		this.date = date;
@@ -31,10 +31,10 @@ public class Report {
 	public void setrId(String rId) {
 		this.rId = rId;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public Product getProduct() {

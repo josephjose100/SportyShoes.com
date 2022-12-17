@@ -1,6 +1,5 @@
 package com.simplilearn.services;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class Reportservice {
 	}
     
 	
-	public List<Report> displayDateReport(java.sql.Date date){
+	public List<Report> displayDateReport(String date){
 
 		return reportrepository.getDateReport(date);
 	}

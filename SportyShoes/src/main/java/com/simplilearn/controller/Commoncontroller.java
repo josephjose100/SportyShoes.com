@@ -1,6 +1,6 @@
 package com.simplilearn.controller;
 
-import java.util.Date;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +61,9 @@ public class Commoncontroller {
 	
 	@GetMapping("/report")
 	public String purchaseReportPage(HttpSession httpsession,Model model) {
-		
+		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+		Admin admin=adminservice.getAdmin();
+		if(admin.getAdminId().equals(adminIdentity)) {
 		List<Report> report=reportservice.displayAllReport();
 		model.addAttribute("report", report);
 		List<Product> products=productservice.displayAllProducts();
@@ -69,12 +71,16 @@ public class Commoncontroller {
 		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
 		model.addAttribute("subscribers",subscribers);
 		return "home";
-		
+		}
+		return "welcome";
 	}
 	
 	   @PostMapping("/categoryreport")
        public String categoryReport(@RequestParam("category") String category,HttpSession httpsession,Model model) {
 		
+	    String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+	    Admin admin=adminservice.getAdmin();
+		if(admin.getAdminId().equals(adminIdentity)) {
 		List<Report> report=reportservice.displayCategoryReport(category);
 		model.addAttribute("report", report);
 		List<Product> products=productservice.displayAllProducts();
@@ -82,9 +88,25 @@ public class Commoncontroller {
 		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
 		model.addAttribute("subscribers",subscribers);
 		return "home";
-		
+			}
+			return "welcome";
 	}
 	
+	   @PostMapping("/datereport")
+       public String dateReport(@RequestParam("date") String date,HttpSession httpsession,Model model) throws ParseException {
+		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+		Admin admin=adminservice.getAdmin();
+		if(admin.getAdminId().equals(adminIdentity)) {
+		List<Report> report=reportservice.displayDateReport(date);
+		model.addAttribute("report", report);
+		List<Product> products=productservice.displayAllProducts();
+		model.addAttribute("products",products);
+		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
+		model.addAttribute("subscribers",subscribers);
+		return "home";
+		}
+		return "welcome";
+	}
 	
 
 	
@@ -153,13 +175,22 @@ public class Commoncontroller {
 		return "welcome";
 	}
 	
-	@PostMapping("/search")
+	@RequestMapping(value="/search",method= {RequestMethod.POST,RequestMethod.GET})
 	public String searchSubscriber(@RequestParam("id") String id,Model model,HttpSession httpsession) {
 		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
 		Admin admin=adminservice.getAdmin();
 		if(admin.getAdminId().equals(adminIdentity)) {
 		
 		Subscriber subscriber=subscriberservice.searchSubscriber(id);
+		if(subscriber==null) {
+			List<Product> products=productservice.displayAllProducts();
+			model.addAttribute("products",products);
+			List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
+			model.addAttribute("subscribers",subscribers);
+			return "home";
+			
+			
+		}
 		String name=subscriber.getName();
 		String password=subscriber.getPassword();
 		model.addAttribute("id",id);
@@ -199,7 +230,7 @@ public class Commoncontroller {
 	}
 	
 	
-	@GetMapping("/delete/{pId}")
+	@RequestMapping(value="/delete/{pId}",method= {RequestMethod.POST,RequestMethod.GET})//@GetMapping("/delete/{pId}")
 	public String deleteProduct(@PathVariable("pId") String pId ,Model model,HttpSession httpsession) {
 		
 		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
@@ -211,7 +242,7 @@ public class Commoncontroller {
 		model.addAttribute("products",products);
 		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
 		model.addAttribute("subscribers",subscribers);
-		return "home";
+		return "redirect:/return";
 		}
 		return "welcome";
 		
