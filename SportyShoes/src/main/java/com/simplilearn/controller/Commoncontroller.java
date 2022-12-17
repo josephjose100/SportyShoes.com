@@ -1,5 +1,6 @@
 package com.simplilearn.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,31 +60,33 @@ public class Commoncontroller {
 	}
 	
 	@GetMapping("/report")
-	public String purchaseReportPage(HttpSession httpsession) {
-		
-
-		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
-		Admin admin=adminservice.getAdmin();
-		if(admin.getAdminId().equals(adminIdentity)) {
-		return "purchase_report";
-		}
-		return "welcome";
-	}
-	
-	@GetMapping("/fullreport")
-	public String showFullReport(HttpSession httpsession,Model model) {
-		
-		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
-		Admin admin=adminservice.getAdmin();
-		if(admin.getAdminId().equals(adminIdentity)) {
+	public String purchaseReportPage(HttpSession httpsession,Model model) {
 		
 		List<Report> report=reportservice.displayAllReport();
 		model.addAttribute("report", report);
-		return "purchase_report";
-		}
-		return "welcome";
+		List<Product> products=productservice.displayAllProducts();
+		model.addAttribute("products",products);
+		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
+		model.addAttribute("subscribers",subscribers);
+		return "home";
+		
 	}
 	
+	   @PostMapping("/categoryreport")
+       public String categoryReport(@RequestParam("category") String category,HttpSession httpsession,Model model) {
+		
+		List<Report> report=reportservice.displayCategoryReport(category);
+		model.addAttribute("report", report);
+		List<Product> products=productservice.displayAllProducts();
+		model.addAttribute("products",products);
+		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
+		model.addAttribute("subscribers",subscribers);
+		return "home";
+		
+	}
+	
+	
+
 	
 	
 	

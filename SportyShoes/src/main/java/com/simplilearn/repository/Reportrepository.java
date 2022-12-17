@@ -1,10 +1,10 @@
 package com.simplilearn.repository;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,14 +28,39 @@ public class Reportrepository {
 		
 	}
 	
-	public List<Report> getReportByDate(Date date){
+  public List<Report> getCategoryReport(String category){
+	  
+
+		List<Report> reports=em.createQuery("select r from Report r").getResultList();
+	   List<Report> report=new ArrayList<>();		
+		for(Report r:reports) {
+			
+			if(r.getProduct().getCategory().equals(category)) {
+				
+				report.add(r);
+			}
+			
+		}
+	  return report;
+  }
+  
+  public List<Report> getDateReport(Date date){
 		
-		Query query=em.createNativeQuery("select * from report where date=?", Report.class);
-		query.setParameter(1, date);
-		List<Report> report=query.getResultList();
+		List<Report> reports=em.createQuery("select r from Report r").getResultList();
+		List<Report> report=new ArrayList<>();	
+           for(Report r:reports) {
+			
+			if(r.getDate().equals(date)) {
+				report.add(r);
+			}
+			
+		}
+		
+		
 		return report;
 		
+		
 	}
-	
+  
 	
 }

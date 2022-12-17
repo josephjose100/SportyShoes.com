@@ -53,6 +53,37 @@ Enter the User Id : <input type="text" name="id">
 <td><span th:text="${password}"></span></td>
 </tr>
 </table>
-<a href="#" th:href="@{/report}">View Purchase Report</a>
+<a href="#" th:href="@{/report}">View Entire Purchase Report</a>
+<form action="./categoryreport" method="post">
+<select id="category" name="category">
+<option value="sports shoes">sports shoes</option>
+<option value="formal shoes">formal shoes</option>
+<option value="casual shoes">casual shoes</option>
+<option value="running shoes">running shoes</option>
+</select>
+<input type="submit" value="Sort by Category">
+</form>
+<table border="1px">
+<tr>
+<td>Report Id </td>
+<td>Date </td>
+<td>Product Id </td>
+<td>Product name </td>
+<td>Product category </td>
+<td>Subscriber Id </td>
+<td>Subscriber Name </td>
+<td>Subscriber Password </td>
+</tr>
+<tr th:each="data : ${report}">
+<td><span th:text="${data.rId}"></span></td>
+<td><span th:text="${data.date}"></span></td>
+<td><span th:text="${data.product.pId}"></span></td>
+<td><span th:text="${data.product.pName}"></span></td>
+<td><span th:text="${data.product.category}"></span></td>
+<td><span th:text="${data.subscriber.id}"></span></td>
+<td><span th:text="${data.subscriber.name}"></span></td>
+<td><span th:text="${data.subscriber.password}"></span></td>
+</tr>
+</table>
 </body>
 </html>

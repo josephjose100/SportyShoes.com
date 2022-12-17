@@ -21,13 +21,16 @@ public class Reportservice {
 		return reportrepository.getAllReport();
 	}
 	
-	
-    public List<Report> displayReportByDate(Date date){
-		
-		return reportrepository.getReportByDate(date);
-		
+	public List<Report> displayCategoryReport(String category){
+
+		return reportrepository.getCategoryReport(category);
 	}
+    
 	
+	public List<Report> displayDateReport(java.sql.Date date){
+
+		return reportrepository.getDateReport(date);
+	}
 	
 	
 }
