@@ -20,6 +20,14 @@ public class Adminrepository {
 		return em.find(Admin.class, adminId);
 	}
 	
+	public Admin getAdmin() {
+		
+		return (Admin)em.createQuery("select a from Admin a").getSingleResult();
+		 
+		
+		
+	}
+	
 	
 	public void deleteAdminById(String adminId) {
 		

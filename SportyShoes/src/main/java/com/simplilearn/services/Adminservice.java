@@ -18,4 +18,17 @@ public class Adminservice {
 		
 	}
 	
+	public Admin updateAdmin(Admin admin) {
+		
+		
+		return adminrepository.saveAdmin(admin);
+		
+	}
+	
+	
+	public Admin getAdmin() {
+		
+		return adminrepository.getAdmin();
+	}
+	
 }

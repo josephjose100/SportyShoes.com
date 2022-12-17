@@ -7,17 +7,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.simplilearn.entity.Subscriber;
-import com.simplilearn.repository.Subscriberrepository;
-import com.simplilearn.services.Subscriberservice;
+import com.simplilearn.entity.Admin;
+import com.simplilearn.repository.Adminrepository;
 
 @SpringBootApplication
-public class SportyShoesApplication{
-	
+public class SportyShoesApplication {
 		
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SportyShoesApplication.class, args);
 	}
+
+	
 }
 /*	@Override
 	public void run(String... args) throws Exception {
@@ -25,7 +26,7 @@ public class SportyShoesApplication{
 		Subscriber subscriber=subscriberservice.searchSubscriber("S2");
 		logger.info("User S2 -> {}",subscriber);
 	
-	private Logger logger=LoggerFactory.getLogger(this.getClass());	
+	
 	}
 }
 
@@ -37,10 +38,12 @@ public class SportyShoesApplication{
 
 	
 	
-/*
+/*private Logger logger=LoggerFactory.getLogger(this.getClass());	
+	@Autowired
+	private Adminrepository adminrepository;
 	*/
 	
-	//private Adminrepository adminrepository;
+	//
 	
 
 /*	@Override

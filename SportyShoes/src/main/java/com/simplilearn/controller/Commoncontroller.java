@@ -2,6 +2,7 @@ package com.simplilearn.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,21 +42,60 @@ public class Commoncontroller {
 		
 	}
 	
+	@GetMapping("/change")
+	public String changeAdminPassword(HttpSession httpsession) {
+		
+		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+		Admin admin=adminservice.getAdmin();
+		if(admin.getAdminId().equals(adminIdentity)) {
+		 return "new_password";
+		}
+		return "welcome";
+	}
+	
+	
+	@PostMapping("/password")
+	public String newPassword(@RequestParam("adminId") String adminId,@RequestParam("password") String password,@RequestParam("password1") String password1,@RequestParam("password2") String password2,Model model,HttpSession httpsession) {
+		   
+		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+		Admin admin1=adminservice.getAdmin();
+		if(admin1.getAdminId().equals(adminIdentity)) {
+		
+		    Admin admin=adminservice.getAdminDetails(adminId);
+	    	if(password.equals(admin.getPassword())&&(password1.equals(password2))) {
+			admin.setPassword(password1);
+			adminservice.updateAdmin(admin);
+			List<Product> products=productservice.displayAllProducts();
+			model.addAttribute("products",products);
+			List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
+			model.addAttribute("subscribers",subscribers);
+			model.addAttribute("admin",admin);
+			return "home";
+			
+		}
+		else {
+			model.addAttribute("Message", "Please check the entered values");
+			return "new_password";
+		}
+		}
+		return "welcome";
+		
+	}
+	
 	
 	@RequestMapping(value={"/login"},method= {RequestMethod.POST,RequestMethod.GET})
-	public String validateLogin(@ModelAttribute Admin admin,Model model,HttpSession httpsession) {
+	public String validateLogin(@ModelAttribute Admin admin,Model model,HttpServletRequest request) {
 		
 	String adminId=admin.getAdminId();
 	String password=admin.getPassword();
 	Admin admin1=adminservice.getAdminDetails(adminId);
 	if(password.equals(admin1.getPassword())) {
-		httpsession.setAttribute("admin", admin1);
+		HttpSession httpsession=request.getSession();
+		httpsession.setAttribute("adminIdentity", admin1.getAdminId());
 		List<Product> products=productservice.displayAllProducts();
 		model.addAttribute("products",products);
 		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
 		model.addAttribute("subscribers",subscribers);
-		model.addAttribute("admin",admin);
-	
 		return "home";
 	}
 	else
@@ -65,17 +105,24 @@ public class Commoncontroller {
 	
 	@RequestMapping(value="/return",method= {RequestMethod.POST,RequestMethod.GET})
 	public String returnHomePage(Model model,HttpSession httpsession) {
-		
+		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+		Admin admin=adminservice.getAdmin();
+		if(admin.getAdminId().equals(adminIdentity)) {
 		List<Product> products=productservice.displayAllProducts();
 		model.addAttribute("products",products);
 		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
 		model.addAttribute("subscribers",subscribers);
 		return "home";
-		
+		}
+		return "welcome";
 	}
 	
 	@PostMapping("/search")
 	public String searchSubscriber(@RequestParam("id") String id,Model model,HttpSession httpsession) {
+		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+		Admin admin=adminservice.getAdmin();
+		if(admin.getAdminId().equals(adminIdentity)) {
+		
 		Subscriber subscriber=subscriberservice.searchSubscriber(id);
 		String name=subscriber.getName();
 		String password=subscriber.getPassword();
@@ -87,30 +134,41 @@ public class Commoncontroller {
 		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
 		model.addAttribute("subscribers",subscribers);
 		return "home";
+		}
+		return "welcome";
 	}
 	
 	
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public String addProduct(@ModelAttribute Product product,Model model,HttpSession httpsession) {
 		
+		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+		Admin admin=adminservice.getAdmin();
+		if(admin.getAdminId().equals(adminIdentity)) {
 		productservice.addProduct(product);
-		
-		
 		return "redirect:/new";
+		}
+		return "welcome";
 		
 	}
 	
 	@GetMapping("/new")
 	public String newProductForm(HttpSession httpsession) {
-		
-		
+		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+		Admin admin=adminservice.getAdmin();
+		if(admin.getAdminId().equals(adminIdentity)) {
 		return "addProduct";
+		}
+		return "welcome";
 	}
 	
 	
 	@GetMapping("/delete/{pId}")
 	public String deleteProduct(@PathVariable("pId") String pId ,Model model,HttpSession httpsession) {
 		
+		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+		Admin admin=adminservice.getAdmin();
+		if(admin.getAdminId().equals(adminIdentity)) {
 		
 		productservice.removeProduct(pId);
 		List<Product> products=productservice.displayAllProducts();
@@ -118,6 +176,8 @@ public class Commoncontroller {
 		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
 		model.addAttribute("subscribers",subscribers);
 		return "home";
+		}
+		return "welcome";
 		
 	}
 	
