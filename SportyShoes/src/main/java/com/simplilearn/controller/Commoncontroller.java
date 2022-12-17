@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.simplilearn.entity.Admin;
 import com.simplilearn.entity.Product;
+import com.simplilearn.entity.Report;
 import com.simplilearn.entity.Subscriber;
 import com.simplilearn.services.Adminservice;
 import com.simplilearn.services.Productservice;
+import com.simplilearn.services.Reportservice;
 import com.simplilearn.services.Subscriberservice;
 
 @Controller
@@ -34,6 +36,9 @@ public class Commoncontroller {
 	
 	@Autowired
 	Adminservice adminservice;
+	
+	@Autowired
+	Reportservice reportservice;
 	
 	@GetMapping("/sportyshoes")
 	public String displayWelcomePage() {
@@ -52,6 +57,34 @@ public class Commoncontroller {
 		}
 		return "welcome";
 	}
+	
+	@GetMapping("/report")
+	public String purchaseReportPage(HttpSession httpsession) {
+		
+
+		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+		Admin admin=adminservice.getAdmin();
+		if(admin.getAdminId().equals(adminIdentity)) {
+		return "purchase_report";
+		}
+		return "welcome";
+	}
+	
+	@GetMapping("/fullreport")
+	public String showFullReport(HttpSession httpsession,Model model) {
+		
+		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
+		Admin admin=adminservice.getAdmin();
+		if(admin.getAdminId().equals(adminIdentity)) {
+		
+		List<Report> report=reportservice.displayAllReport();
+		model.addAttribute("report", report);
+		return "purchase_report";
+		}
+		return "welcome";
+	}
+	
+	
 	
 	
 	@PostMapping("/password")

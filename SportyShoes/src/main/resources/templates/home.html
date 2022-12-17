@@ -20,7 +20,7 @@
 <td><span th:text="${data.pId}"></span></td>
 <td><span th:text="${data.pName}"></span></td>
 <td><span th:text="${data.category}"></span></td>
-<td><a href="#" th:href="@{/delete/{pId}/{admin}(pId=${data.pId},admin=${admin})}">Remove</a></td>
+<td><a href="#" th:href="@{/delete/{pId}(pId=${data.pId})}">Remove</a></td>
 </tr>
 </table>
 <h1>User List :-</h1>
@@ -53,5 +53,6 @@ Enter the User Id : <input type="text" name="id">
 <td><span th:text="${password}"></span></td>
 </tr>
 </table>
+<a href="#" th:href="@{/report}">View Purchase Report</a>
 </body>
 </html>

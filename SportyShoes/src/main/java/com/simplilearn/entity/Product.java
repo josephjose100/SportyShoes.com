@@ -37,6 +37,10 @@ public class Product {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	@Override
+	public String toString() {
+		return "Product [pId=" + pId + ", pName=" + pName + ", category=" + category + "]";
+	}
 	
 	
 	

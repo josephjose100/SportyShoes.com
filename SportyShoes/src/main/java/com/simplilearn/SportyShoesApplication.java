@@ -1,22 +1,17 @@
 package com.simplilearn;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.simplilearn.entity.Admin;
-import com.simplilearn.repository.Adminrepository;
-
 @SpringBootApplication
-public class SportyShoesApplication {
+public class SportyShoesApplication  {
 		
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SportyShoesApplication.class, args);
 	}
+
 
 	
 }
@@ -31,14 +26,20 @@ public class SportyShoesApplication {
 }
 
 	
-*/
 //
 
 	
 
 	
 	
-/*private Logger logger=LoggerFactory.getLogger(this.getClass());	
+/*	
+ 
+ 
+ private Logger logger=LoggerFactory.getLogger(this.getClass());
+    @Autowired
+	Reportrepository reportrepository;	
+
+ 
 	@Autowired
 	private Adminrepository adminrepository;
 	*/

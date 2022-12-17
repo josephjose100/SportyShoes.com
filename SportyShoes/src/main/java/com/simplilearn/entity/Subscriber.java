@@ -40,7 +40,7 @@ public class Subscriber {
 	}
 	@Override
 	public String toString() {
-		return "Subscriber [name=" + name + ", password=" + password + "]";
+		return "Subscriber [id=" + id + ", name=" + name + ", password=" + password + "]";
 	}
 	
 	

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<a href="#" th:href="@{/fullreport}">View The Entire Purchase Report</a>
+
+<table border="1px">
+<tr>
+<td>Report Id </td>
+<td>Date </td>
+<td>Product Id </td>
+<td>Product name </td>
+<td>Product category </td>
+<td>Subscriber Id </td>
+<td>Subscriber Name </td>
+<td>Subscriber Password </td>
+</tr>
+<tr th:each="data : ${report}">
+<td><span th:text="${data.rId}"></span></td>
+<td><span th:text="${data.date}"></span></td>
+<td><span th:text="${data.product.pId}"></span></td>
+<td><span th:text="${data.product.pName}"></span></td>
+<td><span th:text="${data.product.category}"></span></td>
+<td><span th:text="${data.subscriber.id}"></span></td>
+<td><span th:text="${data.subscriber.name}"></span></td>
+<td><span th:text="${data.subscriber.password}"></span></td>
+</tr>
+</table>
+
+
+<a href="#" th:href="@{/return}">Return to home paget</a>
+</body>
+</html>
