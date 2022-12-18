@@ -20,16 +20,12 @@ public class Reportservice {
 		return reportrepository.getAllReport();
 	}
 	
-	public List<Report> displayCategoryReport(String category){
+	public List<Report> displayCategoryReport(String category,String date){
 
-		return reportrepository.getCategoryReport(category);
+		return reportrepository.getCategoryReport(category,date);
 	}
     
 	
-	public List<Report> displayDateReport(String date){
-
-		return reportrepository.getDateReport(date);
-	}
 	
 	
 }

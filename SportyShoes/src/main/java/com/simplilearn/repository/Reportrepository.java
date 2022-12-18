@@ -27,14 +27,14 @@ public class Reportrepository {
 		
 	}
 	
-  public List<Report> getCategoryReport(String category){
+  public List<Report> getCategoryReport(String category,String date){
 	  
 
 		List<Report> reports=em.createQuery("select r from Report r").getResultList();
 	   List<Report> report=new ArrayList<>();		
 		for(Report r:reports) {
 			
-			if(r.getProduct().getCategory().equals(category)) {
+			if((r.getProduct().getCategory().equals(category))&&(r.getDate().equals(date))) {
 				
 				report.add(r);
 			}
@@ -43,23 +43,7 @@ public class Reportrepository {
 	  return report;
   }
   
-  public List<Report> getDateReport(String date){
-		
-		List<Report> reports=em.createQuery("select r from Report r").getResultList();
-		List<Report> report=new ArrayList<>();	
-           for(Report r:reports) {
-			
-			if(r.getDate().equals(date)) {
-				report.add(r);
-			}
-			
-		}
-		
-		
-		return report;
-		
-		
-	}
+ 
   
 	
 }

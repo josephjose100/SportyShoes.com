@@ -76,12 +76,12 @@ public class Commoncontroller {
 	}
 	
 	   @PostMapping("/categoryreport")
-       public String categoryReport(@RequestParam("category") String category,HttpSession httpsession,Model model) {
+       public String categoryReport(@RequestParam("category") String category,@RequestParam("date") String date,HttpSession httpsession,Model model) {
 		
 	    String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
 	    Admin admin=adminservice.getAdmin();
 		if(admin.getAdminId().equals(adminIdentity)) {
-		List<Report> report=reportservice.displayCategoryReport(category);
+		List<Report> report=reportservice.displayCategoryReport(category,date);
 		model.addAttribute("report", report);
 		List<Product> products=productservice.displayAllProducts();
 		model.addAttribute("products",products);
@@ -92,22 +92,7 @@ public class Commoncontroller {
 			return "welcome";
 	}
 	
-	   @PostMapping("/datereport")
-       public String dateReport(@RequestParam("date") String date,HttpSession httpsession,Model model) throws ParseException {
-		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
-		Admin admin=adminservice.getAdmin();
-		if(admin.getAdminId().equals(adminIdentity)) {
-		List<Report> report=reportservice.displayDateReport(date);
-		model.addAttribute("report", report);
-		List<Product> products=productservice.displayAllProducts();
-		model.addAttribute("products",products);
-		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
-		model.addAttribute("subscribers",subscribers);
-		return "home";
-		}
-		return "welcome";
-	}
-	
+
 
 	
 	
@@ -236,8 +221,16 @@ public class Commoncontroller {
 		String adminIdentity=(String)httpsession.getAttribute("adminIdentity");
 		Admin admin=adminservice.getAdmin();
 		if(admin.getAdminId().equals(adminIdentity)) {
-		
+		try {
 		productservice.removeProduct(pId);
+		}catch(Exception e) {
+			
+			List<Product> products=productservice.displayAllProducts();
+			model.addAttribute("products",products);
+			List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
+			model.addAttribute("subscribers",subscribers);
+			return "redirect:/return";
+		}
 		List<Product> products=productservice.displayAllProducts();
 		model.addAttribute("products",products);
 		List<Subscriber> subscribers=subscriberservice.displayAllSubscribers();
