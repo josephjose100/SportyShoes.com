@@ -16,4 +16,15 @@ public class SportyShoesApplication {
 }
 
 
+	/*
+
 	
+Note:-
+	
+Admin Id=A1
+password=asdfgh
+Also see data.sql file inside src/main/resources to understand the initial insert queries after creating table
+Also to view purchase report please scroll down after clicking the link
+
+
+*/
